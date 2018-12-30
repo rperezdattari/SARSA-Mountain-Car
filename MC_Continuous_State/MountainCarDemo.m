@@ -20,12 +20,12 @@ set(gco,'Units','data')
 
 
 maxsteps    = 1000;              % maximum number of steps per episode
-statelist   = BuildStateList();  % the list of states
+[centroids, dev]   = BuildStateList();  % the list of states
 actionlist  = BuildActionList(); % the list of actions
 
-nstates     = size(statelist,1);
 nactions    = size(actionlist,1);
-Q           = BuildQTable( nstates,nactions );  % the Qtable
+nstates     = size(centroids,1);
+theta       = BuildTheta(centroids, nactions); 
 
 alpha       = 0.5;   % learning rate
 gamma       = 1.0;   % discount factor

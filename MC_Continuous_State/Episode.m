@@ -30,7 +30,7 @@ total_reward = 0;
 s   = DiscretizeState(x,statelist);
 % selects an action using the epsilon greedy selection strategy
 a   = e_greedy_selection(Q,s,epsilon);
-
+%xs = [];
 
 for i=1:maxsteps    
         
@@ -38,7 +38,7 @@ for i=1:maxsteps
     action = actionlist(a);    
     
     %do the selected action and get the next car state    
-    xp  = DoAction( action , x );    
+    xp  = DoAction( action , x );
     
     % observe the reward at state xp and the final state flag
     [r,f]   = GetReward(xp);
