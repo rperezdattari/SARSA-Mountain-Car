@@ -27,9 +27,9 @@ nactions    = size(actionlist,1);
 nstates     = size(centroids,1);
 theta       = BuildTheta(centroids, nactions); 
 
-alpha       = 0.5;   % learning rate
-gamma       = 1.0;   % discount factor
-epsilon     = 0.01;  % probability of a random action selection
+alpha       = 0.001;   % learning rate
+gamma       = 0.99;   % discount factor
+epsilon     = 0.9;  % probability of a random action selection
 grafica     = false; % indicates if display the graphical interface
 
 xpoints=[];
@@ -37,7 +37,7 @@ ypoints=[];
 
 for i=1:maxepisodes    
     
-    [total_reward,steps,Q ] = Episode( maxsteps, Q , alpha, gamma,epsilon,statelist,actionlist,grafica );    
+    [total_reward,steps,theta ] = Episode( maxsteps, theta , alpha, gamma,epsilon,actionlist,grafica, centroids, dev );    
     
     disp(['Espisode: ',int2str(i),'  Steps:',int2str(steps),'  Reward:',num2str(total_reward),' epsilon: ',num2str(epsilon)])
     
@@ -50,7 +50,7 @@ for i=1:maxepisodes
     title(['Episode: ',int2str(i),' epsilon: ',num2str(epsilon)])    
     drawnow
     
-    if (i>200)
+    if (i>300)
         grafica=true;
     end
 end
