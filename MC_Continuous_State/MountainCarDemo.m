@@ -50,7 +50,7 @@ for i=1:maxepisodes
     title(['Episode: ',int2str(i),' epsilon: ',num2str(epsilon)])    
     drawnow
     
-    if (i>300)
+    if (i>299)
         grafica=true;
     end
 end

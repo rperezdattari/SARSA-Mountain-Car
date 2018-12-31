@@ -31,7 +31,7 @@ total_reward = 0;
 % selects an action using the epsilon greedy selection strategy
 a   = e_greedy_selection(theta, s, epsilon, centroids, dev);
 
-for i=1:maxsteps    
+for i=1:maxsteps
     % convert the index of the action into an action value
     action = actionlist(a);
     

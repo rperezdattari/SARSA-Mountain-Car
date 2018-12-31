@@ -13,13 +13,4 @@ function [ theta ] = UpdateSARSA( s, a, r, sp, ap, theta , alpha, gamma, centroi
 Qp = EvaluateQFunction( centroids, dev, theta, ap, sp );
 Q = EvaluateQFunction( centroids, dev, theta, a, s );
 
-rbf_eval = zeros(length(centroids), 1);
-for i = 1:12
-    rbf_eval(i) = exp(-abs(centroids(i) - s(1)) / (dev(1)^2));
-end
-
-for i = 13:24
-    rbf_eval(i) = exp(-abs(centroids(i) - s(2)) / (dev(2)^2));
-end
-
-theta(:, a) =  theta(:,a) + alpha * ( r + gamma*Qp - Q ) * rbf_eval;
+theta(:, a) =  theta(:,a) + alpha * ( r + gamma*Qp - Q ) * phi(s, centroids, dev);
