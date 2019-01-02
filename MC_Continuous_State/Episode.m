@@ -29,7 +29,7 @@ total_reward = 0;
 % convert the continous state variables to an index of the statelist
 % s   = DiscretizeState(x,statelist);
 % selects an action using the epsilon greedy selection strategy
-a   = e_greedy_selection(theta, s, epsilon, centroids, dev);
+a  = e_greedy_selection(theta, s, epsilon, centroids, dev);
 
 for i=1:maxsteps
     % convert the index of the action into an action value

@@ -1,4 +1,4 @@
-function [ a ] = GetBestAction( theta, s, centroids, dev )
+function [ a, maxQ ] = GetBestAction( theta, s, centroids, dev )
 %GetBestAction return the best action for state (s)
 %Q: the Qtable
 %s: the current state

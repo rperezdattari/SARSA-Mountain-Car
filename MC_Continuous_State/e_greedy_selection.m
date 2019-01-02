@@ -5,7 +5,7 @@ function [ a ] = e_greedy_selection( theta , s, epsilon, centroids, dev )
 
 actions = size(theta,2);
 if (rand()>epsilon) 
-    a = GetBestAction(theta,s, centroids, dev);    
+    [a, max_Q] = GetBestAction(theta,s, centroids, dev);    
 else
     % selects a random action based on a uniform distribution
     % +1 because randint goes from 0 to N-1 and matlab matrices goes from

@@ -35,23 +35,37 @@ grafica     = false; % indicates if display the graphical interface
 xpoints=[];
 ypoints=[];
 
+x = -2:0.25:2;
+y = x;
+[X,Y] = meshgrid(x);
+F = X.*exp(-X.^2-Y.^2);
+
+f2 = figure
+
 for i=1:maxepisodes    
     
     [total_reward,steps,theta ] = Episode( maxsteps, theta , alpha, gamma,epsilon,actionlist,grafica, centroids, dev );    
     
     disp(['Espisode: ',int2str(i),'  Steps:',int2str(steps),'  Reward:',num2str(total_reward),' epsilon: ',num2str(epsilon)])
     
-    epsilon = epsilon * 0.99;
+    epsilon = epsilon * 0.995;
     
     xpoints(i)=i-1;
     ypoints(i)=steps;
-    subplot(2,1,1);    
+    subplot(3,1,1);    
     plot(xpoints,ypoints)      
     title(['Episode: ',int2str(i),' epsilon: ',num2str(epsilon)])    
     drawnow
     
-    if (i>299)
+    if (i>8995)
         grafica=true;
+    end
+    
+    if true
+        subplot(3,1,3); 
+        V  = GetValueFunction(theta, centroids, dev);   
+        surf(V)
+        shading interp
     end
 end
 
