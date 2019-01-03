@@ -1,11 +1,22 @@
-function [ centroids, dev ] = BuildStateList()
+function [ centers, dev ] = BuildStateList()
 %BuildStateList builds a state list from a state matrix
 
 % state RBF representation for the mountain car problem
-num_rbf_per_dim = 30.0;
+rbf_1 = 70.0; %70
+rbf_2 = 35.0; %35
 
-x = linspace(-1.5, 0.5, num_rbf_per_dim);
-xp = linspace(-0.07, 0.07, num_rbf_per_dim);
-dev = [0.5 + 1.5, 0.07 + 0.07] * 0.9;
+x = linspace(-1.2, 0.5, rbf_1);
+xp = linspace(-0.07, 0.07, rbf_2);
+centers = zeros(length(x) * length(xp), 2);
 
-centroids = [x, xp];
+counter = 1;
+for i = 1:length(x)
+    for j = 1:length(xp)
+        centers(counter, :) = [x(i), xp(j)];
+        counter = counter + 1;
+    end
+end
+
+dev = [0.1, 0.03]*5.0;
+
+%dev = [2/rbf_1, 0.14/rbf_2]*30.0;

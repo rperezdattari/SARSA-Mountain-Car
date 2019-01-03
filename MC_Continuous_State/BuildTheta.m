@@ -1,5 +1,9 @@
-function [ theta ] = BuildTheta(centroids, nactions)
+function [ theta ] = BuildTheta(centroids, nactions, zero_init)
 %BuildStateList builds a state list from a state matrix
 
 % state RBF representation for the mountain car problem
-theta = zeros(length(centroids),nactions);
+if zero_init
+    theta = zeros(length(centroids),nactions);
+else
+    theta = ones(length(centroids),nactions);
+end

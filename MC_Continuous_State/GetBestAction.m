@@ -18,4 +18,5 @@ for i = 1:nactions
     end
 end
 
+maxQ = -maxQ;
 a = max_i;

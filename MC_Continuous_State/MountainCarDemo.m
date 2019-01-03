@@ -20,12 +20,13 @@ set(gco,'Units','data')
 
 
 maxsteps    = 1000;              % maximum number of steps per episode
-[centroids, dev]   = BuildStateList();  % the list of states
+[centroids, dev] = BuildStateList();  % the list of states
 actionlist  = BuildActionList(); % the list of actions
 
 nactions    = size(actionlist,1);
 nstates     = size(centroids,1);
-theta       = BuildTheta(centroids, nactions); 
+zero_init   = true;
+theta       = BuildTheta(centroids, nactions, zero_init); 
 
 alpha       = 0.001;   % learning rate
 gamma       = 0.99;   % discount factor
@@ -35,20 +36,13 @@ grafica     = false; % indicates if display the graphical interface
 xpoints=[];
 ypoints=[];
 
-x = -2:0.25:2;
-y = x;
-[X,Y] = meshgrid(x);
-F = X.*exp(-X.^2-Y.^2);
-
-f2 = figure
-
 for i=1:maxepisodes    
     
     [total_reward,steps,theta ] = Episode( maxsteps, theta , alpha, gamma,epsilon,actionlist,grafica, centroids, dev );    
     
     disp(['Espisode: ',int2str(i),'  Steps:',int2str(steps),'  Reward:',num2str(total_reward),' epsilon: ',num2str(epsilon)])
     
-    epsilon = epsilon * 0.995;
+    epsilon = epsilon * 0.9993;
     
     xpoints(i)=i-1;
     ypoints(i)=steps;
@@ -61,7 +55,8 @@ for i=1:maxepisodes
         grafica=true;
     end
     
-    if true
+    if mod(i, 10) == 0
+        i = i
         subplot(3,1,3); 
         V  = GetValueFunction(theta, centroids, dev);   
         surf(V)
