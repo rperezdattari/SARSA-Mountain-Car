@@ -28,7 +28,7 @@ nstates     = size(centroids,1);
 zero_init   = true;
 theta       = BuildTheta(centroids, nactions, zero_init); 
 
-alpha       = 0.001;   % learning rate
+alpha       = 0.1;   % learning rate
 gamma       = 0.99;   % discount factor
 epsilon     = 0.9;  % probability of a random action selection
 grafica     = false; % indicates if display the graphical interface
@@ -36,13 +36,17 @@ grafica     = false; % indicates if display the graphical interface
 xpoints=[];
 ypoints=[];
 
+visited_states = zeros(50, 50);
+return_history = zeros(1, maxepisodes);
+
 for i=1:maxepisodes    
     
-    [total_reward,steps,theta ] = Episode( maxsteps, theta , alpha, gamma,epsilon,actionlist,grafica, centroids, dev );    
+    [total_reward,steps,theta, visited_states ] = Episode( maxsteps, theta , alpha, gamma,epsilon,actionlist,grafica, centroids, dev, visited_states );    
     
     disp(['Espisode: ',int2str(i),'  Steps:',int2str(steps),'  Reward:',num2str(total_reward),' epsilon: ',num2str(epsilon)])
     
-    epsilon = epsilon * 0.9993;
+    epsilon = epsilon * 0.9996; % 0.9996
+    return_history(i) = total_reward;
     
     xpoints(i)=i-1;
     ypoints(i)=steps;
@@ -51,16 +55,52 @@ for i=1:maxepisodes
     title(['Episode: ',int2str(i),' epsilon: ',num2str(epsilon)])    
     drawnow
     
-    if (i>8995)
+    if (i>10000)
         grafica=true;
     end
     
-    if mod(i, 10) == 0
-        i = i
+    %if mod(i, 12) == 0
+     %   subplot(3,1,3); 
+      %  V  = GetValueFunction(theta, centroids, dev);   
+       % surf(V)
+        %shading interp
+        %save('results/test12.mat', 'theta', 'visited_states', 'return_history')
+   % end
+    
+    if i == 12
         subplot(3,1,3); 
         V  = GetValueFunction(theta, centroids, dev);   
         surf(V)
         shading interp
+        save('results/test12.mat', 'theta', 'visited_states', 'return_history')
+    end
+    
+    if i == 104
+        subplot(3,1,3); 
+        V  = GetValueFunction(theta, centroids, dev);   
+        surf(V)
+        shading interp
+        save('results/test104.mat', 'theta', 'visited_states', 'return_history')
+    end
+    
+    if i == 1000
+        subplot(3,1,3); 
+        V  = GetValueFunction(theta, centroids, dev);   
+        surf(V)
+        shading interp
+        save('results/test1000.mat', 'theta', 'visited_states', 'return_history')
+    end
+    
+    if i == 9000
+        subplot(3,1,3); 
+        V  = GetValueFunction(theta, centroids, dev);   
+        surf(V)
+        shading interp
+        save('results/test9000.mat', 'theta', 'visited_states', 'return_history')
+    end
+    
+    if mod(i, 100) == 0
+        save('results/test.mat', 'theta', 'visited_states', 'return_history')
     end
 end
 
