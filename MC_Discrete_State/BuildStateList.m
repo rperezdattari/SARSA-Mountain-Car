@@ -2,8 +2,8 @@ function [ states ] = BuildStateList
 %BuildStateList builds a state list from a state matrix
 
 % state discretization for the mountain car problem
-xdiv  = (0.55-(-1.5))   / 10.0;
-xpdiv = (0.07-(-0.07)) / 5.0;
+xdiv  = (0.55-(-1.5))   / 20.0;
+xpdiv = (0.07-(-0.07)) / 20.0;
 
 x = -1.5:xdiv:0.5;
 xp= -0.07:xpdiv:0.07;

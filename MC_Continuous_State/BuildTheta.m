@@ -1,9 +1,4 @@
-function [ theta ] = BuildTheta(centroids, nactions, zero_init)
-%BuildStateList builds a state list from a state matrix
+function [ theta ] = BuildTheta(centroids, nactions)
+%Initialize the weights of the action value function to zero 
 
-% state RBF representation for the mountain car problem
-if zero_init
-    theta = zeros(length(centroids),nactions);
-else
-    theta = ones(length(centroids),nactions);
-end
+theta = zeros(length(centroids),nactions);

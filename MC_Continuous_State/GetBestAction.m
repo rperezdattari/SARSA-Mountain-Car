@@ -1,8 +1,7 @@
 function [ a, maxQ ] = GetBestAction( theta, s, centroids, dev )
 %GetBestAction return the best action for state (s)
-%Q: the Qtable
-%s: the current state
-% Q has structure  Q(states,actions)
+% Evaluates the Q function over all the actions and selects the one that
+% maxQ
 
 nactions = size(theta, 2);
 maxQ = -1e30;
@@ -18,5 +17,5 @@ for i = 1:nactions
     end
 end
 
-maxQ = -maxQ;
+maxQ = -maxQ; % return -maxQ because this value is only used for the cost-to-go function
 a = max_i;

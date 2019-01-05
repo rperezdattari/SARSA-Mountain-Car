@@ -19,7 +19,6 @@ function [ total_reward,steps,theta, visited_states ] = Episode( maxsteps, theta
 
 
 initial_position = -0.5;
-%initial_position = -0.6 + rand();
 initial_speed    =  0.0;
 
 s            = [initial_position,initial_speed];
