@@ -4,6 +4,6 @@
 
 **2. Folder MC_Continuous_State:** contains a continuous state implementation of the same problem using RBFs. To run follow the same instructions of the README file in 1.
 
-**3. Folder plots:** contains 4 scripts (messy) that generate the images attached the report Mountain_Car_SARSA.pdf.
+**3. Folder plots:** contains 4 scripts (messy) that generate the images attached to the report Mountain_Car_SARSA.pdf.
 
 **4. Mountain_Car_SARSA.pdf:** the report.
